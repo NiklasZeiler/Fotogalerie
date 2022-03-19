@@ -1,0 +1,21 @@
+<section>
+    <div class="picture" id="{{ i }}" *ngFor="let image of images, let i = index">
+        <img (click)="openImage(i)" src="{{ image.photoUrl }}">
+    </div>
+
+    <div *ngIf="showBigImg" class="bigImagebox">
+        <mat-icon (click)="closeImage()" aria-hidden="false" aria-label="Beispiel home icon"> close </mat-icon>
+        <div *ngIf="previewImage">
+            <img src="{{ currentBigImage }}" alt="">
+        </div>
+        <button class="addTag" *ngIf="showBigImg" (click)="openDialog()">Add Tag</button>
+        <div class="tags">
+            <span *ngFor="let tag of tags,let i = index" id="{{ i }}"># {{ tag }}</span>
+        </div>
+
+
+
+
+    </div>
+
+</section>

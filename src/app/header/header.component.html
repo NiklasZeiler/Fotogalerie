@@ -1,0 +1,9 @@
+<header>
+    <div>
+        <h1>Fotogallerie</h1>
+    </div>
+    <div class="upload">
+        <input (change)="this.uploadService.uploadFile($event)" type="file">
+        <button (click)="this.uploadService.upload()" type="button">Upload</button>
+    </div>
+</header>

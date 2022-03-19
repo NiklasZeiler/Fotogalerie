@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: antiquewhite;
+
+    h1 {
+        font-size: 50px;
+        font-weight: 600;
+        margin-left: 20px;
+    }
+
+    .upload {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            width: 126px;
+            margin-top: 8px;
+            height: 25px;
+            cursor: pointer;
+        }
+    }
+}

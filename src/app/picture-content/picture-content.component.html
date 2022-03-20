@@ -1,21 +1,19 @@
 <section>
-    <div class="picture" id="{{ i }}" *ngFor="let image of images, let i = index">
-        <img (click)="openImage(i)" src="{{ image.photoUrl }}">
+    <div class="picture" *ngFor="let image of images">
+        <img (click)="openImage(image)" src="{{ image.photoUrl }}">
     </div>
+
+    <!-- <app-lightbox [presentedImage]="this.presentedImage" *ngIf="showBigImg"></app-lightbox> -->
 
     <div *ngIf="showBigImg" class="bigImagebox">
         <mat-icon (click)="closeImage()" aria-hidden="false" aria-label="Beispiel home icon"> close </mat-icon>
         <div *ngIf="previewImage">
             <img src="{{ currentBigImage }}" alt="">
         </div>
-        <button class="addTag" *ngIf="showBigImg" (click)="openDialog()">Add Tag</button>
-        <div class="tags">
-            <span *ngFor="let tag of tags,let i = index" id="{{ i }}"># {{ tag }}</span>
+        <button class="addTag" *ngIf="showBigImg" (click)="openDialog(presentedImage.firestoreDocumentId)">Add Tag</button>
+        <div class="tags" *ngIf="showBigImg">
+            <span id={{i}} *ngFor="let tag of tags, let i = index"># {{ tag }}</span>
         </div>
-
-
-
-
     </div>
 
 </section>

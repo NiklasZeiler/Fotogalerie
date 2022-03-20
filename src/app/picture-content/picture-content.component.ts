@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { collection, doc, setDoc } from '@firebase/firestore';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { AddTagdialogComponent } from '../dialog/addtagdialog/addtagdialog.component';
 import { UploadService } from '../services/upload.service';
 
@@ -21,32 +21,31 @@ export class PictureContentComponent implements OnInit {
   currentBigImage: string = this.images[0];
   tag: string;
   tags: any = [];
+  @Input() firestoreDocumentId: string;
+  id: string;
+  presentedImage;
 
 
   constructor(
     public uploadService: UploadService,
     public dialog: MatDialog,
     public firestore: AngularFirestore,
+    // private router: Router
   ) { }
 
   /**
    * if the website is loaded the first time this function will save the url in the value image
    */
   ngOnInit(): void {
-
-   
-    
-  
-    this.uploadService.getImageUrl()
+    this.uploadService.getImages()
       .subscribe((image) => {
         this.images = image;
-
+        console.log(this.images);
       });
 
-    this.uploadService.getFirestoreDocuments();
 
- 
 
+    this.uploadService.getIds();
   }
 
 
@@ -54,30 +53,28 @@ export class PictureContentComponent implements OnInit {
    * open the small image to larger image 
    * @param index number - the number of every image in images 
    */
-  openImage(index: number): void {
+  openImage(image: any): void {
     this.showBigImg = true;
     this.previewImage = true;
-    this.currentBigImage = this.images[index].photoUrl;
+    this.currentBigImage = image.photoUrl;
+    this.presentedImage = image;
+    this.tags = image.tags;
+    console.log('tag ist', image.tags);
+
   }
 
-
-  /**
-   * close the larger image 
-   */
   closeImage() {
     this.showBigImg = false;
     this.previewImage = false;
 
   }
 
-
-  /**
-   * open dialog to add a tag to the image. Save the value to result and push it to array tags
-   */
-  openDialog() {
+  openDialog(firestoreDocumentId: string) {
     const dialogRef = this.dialog.open(AddTagdialogComponent, {
       width: '250px',
       data: { tag: this.tag },
+      
+      
     });
 
 
@@ -89,19 +86,13 @@ export class PictureContentComponent implements OnInit {
 
       this.firestore
         .collection('images')
-        .doc('665V1DG8BbjjvQxD93HO')
-        .update({tags: this.tags})
-        .then((test) => {
-          console.log(test);
-          
-        });
+        .doc(firestoreDocumentId)
+        .update({ tags: this.tags })
+        .then(() => {
+          console.log('Tag are updated', firestoreDocumentId);
 
+        })
     });
-
-
   }
-
 }
-
-
 

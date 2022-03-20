@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { getDatabase } from 'firebase/database';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { map, Observable, pipe, subscribeOn } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class UploadService {
 
   photoUrl: string | undefined;
   tags: any = [];
-  database = getDatabase();
+  firestoreDocumentId;
 
   constructor(
     public storage: AngularFireStorage,
@@ -47,7 +47,7 @@ export class UploadService {
   /**
    * After 5 seconds this function will upload the photoUrl to firebase collection
    */
-  upload() {
+  uploadToCollection() {
     setTimeout(() => {
       this.firestore.collection('images')
         .add({ photoUrl: this.photoUrl, tags: this.tags });
@@ -56,25 +56,28 @@ export class UploadService {
   }
 
   /**
-   * get the url from the new image in collection 
-   * @returns the id from the new image whitch is uploaded 
+   * get the images array from firebase 
+   * @returns the collection image
    */
-  getImageUrl() {
-    return this
-      .firestore
-      .collection('images')
-      .valueChanges({ idField: 'id' })
-  }
-
-
-  getFirestoreDocuments() {
+  getImages() {
     return this
       .firestore
       .collection('images')
       .valueChanges({ idField: 'firestoreDocumentId' })
-
   }
 
+  getIds() {
+    this.firestore.collection<any>('images').snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const firestoreDocumentId = a.payload.doc.id;
+        console.log('id', firestoreDocumentId, 'data', data);
+        return { firestoreDocumentId, data };
+      });
+    })).subscribe() 
+  }
 }
+
+
 
 

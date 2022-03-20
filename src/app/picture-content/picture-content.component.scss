@@ -16,15 +16,8 @@ section {
             height: 300px;
             border-radius: 10px;
             cursor: zoom-in;
+            object-fit: cover;
         }
-
-        // button {
-        //     width: 80px;
-        //     height: 40px;
-        //     margin-top: 6px;
-        //     border-radius: 10px;
-        //     cursor: pointer;
-        // }
     }
 
     .bigImagebox {
@@ -39,7 +32,7 @@ section {
         align-items: center;
 
         img {
-            width: 470px;
+            width: 800px;
         }
 
         mat-icon {
@@ -64,10 +57,13 @@ section {
             display: flex;
             flex-direction: column;
             margin-left: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
 
             span {
                 font-size: 20px;
                 font-weight: 400;
+                padding: 3px;
             }
         }
     }

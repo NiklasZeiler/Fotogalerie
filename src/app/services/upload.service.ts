@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 
 @Injectable({
@@ -27,6 +27,7 @@ export class UploadService {
   async uploadFile(event: any): Promise<void> {
     this.photoUrl = '';
 
+
     const file = event.target.files[0];
 
 
@@ -37,7 +38,6 @@ export class UploadService {
         () => {
           getDownloadURL(storageRef).then((imageUrl) => {
             this.photoUrl = imageUrl;
-            console.log(imageUrl);
           })
         }
       )
@@ -48,6 +48,7 @@ export class UploadService {
    * After 5 seconds this function will upload the photoUrl to firebase collection
    */
   uploadToCollection() {
+    alert('Please wait 5 seconds after click upload');
     setTimeout(() => {
       this.firestore.collection('images')
         .add({ photoUrl: this.photoUrl, tags: this.tags });
@@ -66,15 +67,18 @@ export class UploadService {
       .valueChanges({ idField: 'firestoreDocumentId' })
   }
 
+
+  /**
+   * get ids from document
+   */
   getIds() {
     this.firestore.collection<any>('images').snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         const firestoreDocumentId = a.payload.doc.id;
-        console.log('id', firestoreDocumentId, 'data', data);
         return { firestoreDocumentId, data };
       });
-    })).subscribe() 
+    })).subscribe()
   }
 }
 

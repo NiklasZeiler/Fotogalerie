@@ -32,7 +32,7 @@ section {
         align-items: center;
 
         img {
-            width: 800px;
+            width: clamp(200px, 35vw, 800px);
         }
 
         mat-icon {

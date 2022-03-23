@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
 import { AddTagdialogComponent } from '../dialog/addtagdialog/addtagdialog.component';
 import { UploadService } from '../services/upload.service';
 
@@ -40,7 +38,6 @@ export class PictureContentComponent implements OnInit {
     this.uploadService.getImages()
       .subscribe((image) => {
         this.images = image;
-        console.log(this.images);
       });
 
 
@@ -59,17 +56,25 @@ export class PictureContentComponent implements OnInit {
     this.currentBigImage = image.photoUrl;
     this.presentedImage = image;
     this.tags = image.tags;
-    console.log('tag ist', image.tags);
-
   }
+  
 
+  /**
+   * close big image
+   */
   closeImage() {
     this.showBigImg = false;
     this.previewImage = false;
 
   }
 
-  openDialog(firestoreDocumentId: string) {
+
+  /**
+   * add a tag to picture and save this in firestore
+   * @param firestoreDocumentId string - give the id from document 
+   * 
+   */
+  addTag(firestoreDocumentId: string) {
     const dialogRef = this.dialog.open(AddTagdialogComponent, {
       width: '250px',
       data: { tag: this.tag },
@@ -89,8 +94,6 @@ export class PictureContentComponent implements OnInit {
         .doc(firestoreDocumentId)
         .update({ tags: this.tags })
         .then(() => {
-          console.log('Tag are updated', firestoreDocumentId);
-
         })
     });
   }

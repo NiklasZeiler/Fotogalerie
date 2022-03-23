@@ -20,7 +20,8 @@ import { AddTagdialogComponent } from './dialog/addtagdialog/addtagdialog.compon
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { LightboxComponent } from './lightbox/lightbox.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -30,8 +31,6 @@ import { LightboxComponent } from './lightbox/lightbox.component';
     HeaderComponent,
     PictureContentComponent,
     AddTagdialogComponent,
-    LightboxComponent
-    
 
 
   ],
@@ -50,7 +49,8 @@ import { LightboxComponent } from './lightbox/lightbox.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
 
 
   ],

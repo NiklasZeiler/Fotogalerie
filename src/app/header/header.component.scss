@@ -6,7 +6,7 @@ header {
     background-color: antiquewhite;
 
     h1 {
-        font-size: 50px;
+        font-size: clamp(25px, 5vw, 50px);
         font-weight: 600;
         margin-left: 20px;
     }
@@ -16,10 +16,17 @@ header {
         flex-direction: column;
 
         button {
-            width: 126px;
+            width: clamp(50px, 20vw, 126px);
             margin-top: 8px;
             height: 25px;
             cursor: pointer;
         }
     }
 }
+
+@media (max-width: 400px) {
+    header {
+        flex-direction: column;
+    }
+}
+

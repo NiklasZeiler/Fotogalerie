@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LightboxComponent } from './lightbox/lightbox.component';
 
-const routes: Routes = [
-  // {path: 'lightbox/:id', component: LightboxComponent}
-];
+
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

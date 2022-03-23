@@ -6,11 +6,11 @@
     <!-- <app-lightbox [presentedImage]="this.presentedImage" *ngIf="showBigImg"></app-lightbox> -->
 
     <div *ngIf="showBigImg" class="bigImagebox">
-        <mat-icon (click)="closeImage()" aria-hidden="false" aria-label="Beispiel home icon"> close </mat-icon>
+        <mat-icon (click)="closeImage()" aria-hidden="false"> close </mat-icon>
         <div *ngIf="previewImage">
             <img src="{{ currentBigImage }}" alt="">
         </div>
-        <button class="addTag" *ngIf="showBigImg" (click)="openDialog(presentedImage.firestoreDocumentId)">Add Tag</button>
+        <button class="addTag" *ngIf="showBigImg" (click)="addTag(presentedImage.firestoreDocumentId)">Add Tag</button>
         <div class="tags" *ngIf="showBigImg">
             <span id={{i}} *ngFor="let tag of tags, let i = index"># {{ tag }}</span>
         </div>

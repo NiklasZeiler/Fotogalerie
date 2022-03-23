@@ -1,11 +1,11 @@
 export const environment = {
-    firebase: {
-    projectId: 'fotogallerie-10a83',
-    appId: '1:1077144018026:web:de92e4e1478bfcc1c13e13',
-    storageBucket: 'fotogallerie-10a83.appspot.com',
-    apiKey: 'AIzaSyDeNUxkOrkI-XU0mYpSmU0LV0Sofom98h4',
-    authDomain: 'fotogallerie-10a83.firebaseapp.com',
-    messagingSenderId: '1077144018026',
+  firebase: {
+    apiKey: "AIzaSyDHID976Jqg6BPESyqEB2RKDEYVdcRw368",
+    authDomain: "fotogalerie-3da19.firebaseapp.com",
+    projectId: "fotogalerie-3da19",
+    storageBucket: "fotogalerie-3da19.appspot.com",
+    messagingSenderId: "1008309713040",
+    appId: "1:1008309713040:web:3e783030be4fb5323a4015"
   },
   production: true
 };

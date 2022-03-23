@@ -12,7 +12,7 @@
         </div>
         <button class="addTag" *ngIf="showBigImg" (click)="addTag(presentedImage.firestoreDocumentId)">Add Tag</button>
         <div class="tags" *ngIf="showBigImg">
-            <span id={{i}} *ngFor="let tag of tags, let i = index"># {{ tag }}</span>
+            <span id={{}} *ngFor="let tag of tags, let i = index"># {{ tag }}</span>
         </div>
     </div>
 
